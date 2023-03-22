@@ -1,9 +1,13 @@
 package example.project;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.*;
 
-import example.project.domain.Scenario;
+import example.project.domain.*;
 import org.junit.jupiter.api.Test;
+
+
+import java.util.*;
 
 public class TestChecker {
 
@@ -11,8 +15,11 @@ public class TestChecker {
     public void testCheckCollisionViolations()
     {
         // setup
-        Simulator simulator = new Simulator("dummy");
-        Scenario scenario = new Scenario();
+        Simulator simulator = mock();
+        Scenario scenario = mock();
+        SimulationResult result = new SimulationResult();
+
+        when(simulator.run(scenario)).thenReturn(result);
 
         // testing target
         Checker checker = new Checker(simulator);
